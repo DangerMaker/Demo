@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="55dp" android:layout_alignParentBottom="true"
+    android:gravity="center_vertical"
+    android:background="#f8f8f8"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@+id/layout_market" android:layout_width="0.0dip" android:layout_height="match_parent" android:layout_weight="1.0">
+        <View android:layout_gravity="bottom" android:background="?android:attr/selectableItemBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center"  android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="match_parent">
+            <ImageView android:id="@+id/img_home" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/tab_market_selector" android:scaleType="centerInside" android:contentDescription="@null" />
+            <TextView android:id="@+id/text_home" android:text="行情" style="@style/homepage_tab_text" />
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout android:id="@+id/layout_news" android:layout_width="0.0dip" android:layout_height="match_parent" android:layout_weight="1.0">
+        <View android:layout_gravity="bottom" android:background="?android:attr/selectableItemBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="match_parent">
+            <ImageView android:id="@+id/img_channel" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/tab_news_selector" android:scaleType="centerInside" android:contentDescription="@null" />
+            <TextView android:id="@+id/text_channel" android:text="新闻" style="@style/homepage_tab_text" />
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout android:id="@+id/layout_live" android:layout_width="0.0dip" android:layout_height="match_parent" android:layout_weight="1.0">
+        <View android:layout_gravity="bottom" android:background="?android:attr/selectableItemBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="match_parent">
+            <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:id="@+id/img_subscribe" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/tab_live_selector" android:scaleType="centerInside" android:layout_centerHorizontal="true" android:contentDescription="@null" />
+            </RelativeLayout>
+            <TextView android:id="@+id/text_subscribe" android:text="课堂" style="@style/homepage_tab_text" />
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout android:id="@+id/layout_trade" android:layout_width="0.0dip" android:layout_height="match_parent" android:layout_weight="1.0">
+        <View android:layout_gravity="bottom" android:background="?android:attr/selectableItemBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="match_parent">
+            <ImageView android:id="@+id/img_vip" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/tab_trade_selector" android:scaleType="centerInside" android:contentDescription="@null" />
+            <TextView android:id="@+id/text_vip" android:text="交易" style="@style/homepage_tab_text" />
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout android:id="@+id/layout_kefu" android:layout_width="0.0dip" android:layout_height="match_parent" android:layout_weight="1.0">
+        <View android:layout_gravity="bottom" android:background="?android:attr/selectableItemBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center"  android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="match_parent">
+            <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:id="@+id/img_user" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/tab_kefu_selector" android:scaleType="centerInside" android:layout_centerHorizontal="true" android:contentDescription="@null" />
+            </RelativeLayout>
+            <TextView android:id="@+id/text_user" android:text="客服" style="@style/homepage_tab_text" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

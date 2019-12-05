@@ -16,7 +16,7 @@ ext {
      * 版本统一管理
      */
     versions = [
-            applicationId           : "com.ez08.compass",        //应用ID
+            applicationId           : "com.ez08.compass1",        //应用ID
             versionCode             : 820191201,                    //版本号
             versionName             : "6.0.0",              //版本名称
 
@@ -34,7 +34,10 @@ ext {
 
             arouterApiVersion       : "1.5.0",
             arouterCompilerVersion  : "1.2.2",
-            arouterAnnotationVersion: "1.5.0"
+            arouterAnnotationVersion: "1.5.0",
+            rxJavaVersion           : "2.2.0",
+            rxAndroidVersion        : "2.0.2",
+            roomVersion             : "1.1.1"
     ]
 
     dependencies = [
@@ -52,5 +55,9 @@ ext {
             "arouter_api"         : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
             "arouter_compiler"    : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
             "arouter_annotation"  : "com.alibaba:arouter-annotation:${versions["arouterAnnotationVersion"]}",
+            "rxJava"              : "io.reactivex.rxjava2:rxjava:${versions["rxJavaVersion"]}",
+            "rxAndroid"           : "io.reactivex.rxjava2:rxandroid:${versions["rxAndroidVersion"]}",
+            "room"                : "android.arch.persistence.room:runtime:${versions["roomVersion"]}",
+            "room_compiler"       :"android.arch.persistence.room:compiler:${versions["roomVersion"]}"
     ]
 }
