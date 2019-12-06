@@ -18,6 +18,11 @@ public class UnScrollViewPager extends ViewPager {
     }
 
     @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return false;
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent ev) {
         return false;
     }

@@ -1,5 +1,6 @@
 package com.compass.common.base;
 
 public interface BasePresenter {
-    void start();
+     void subscribe();
+     void unsubscribe();
 }

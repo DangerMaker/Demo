@@ -29,6 +29,7 @@ dependencies {
     implementation rootProject.ext.dependencies["rxJava"]
     implementation rootProject.ext.dependencies["rxAndroid"]
     implementation rootProject.ext.dependencies["room"]
+    implementation rootProject.ext.dependencies["recyclerview"]
     annotationProcessor rootProject.ext.dependencies["room_compiler"]
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["runner"]

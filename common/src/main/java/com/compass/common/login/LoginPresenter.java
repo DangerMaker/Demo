@@ -58,8 +58,4 @@ public class LoginPresenter implements LoginContract.Presenter {
         mCompositeDisposable.add(disposable);
     }
 
-    @Override
-    public void start() {
-
-    }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.compass.market.view;
 
 import android.content.Context;
@@ -21,6 +20,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -40,7 +41,7 @@ import com.compass.common.utils.ScreenUtil;
  * the user's scroll progress.
  * <p>
  * To use the component, simply add it to your view hierarchy. Then in your
- * {@link android.app.Activity} or {@link androidx.fragment} call
+ * {@link android.app.Activity} or {@link android.support.v4.app.Fragment} call
  * {@link #setViewPager(ViewPager)} providing it the ViewPager this layout is being used for.
  * <p>
  * The colors can be customized in two ways. The first and simplest is to provide an array of colors
@@ -108,6 +109,23 @@ public class CompassTabView extends HorizontalScrollView {
 //        setBackgroundColor(Color.RED);
     }
 
+    public int currentPosition = 0;
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        MySavedState ss = new MySavedState(superState);
+        ss.currentPosition = currentPosition;
+        return  ss;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        MySavedState ss = (MySavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+        //调用别的方法，把保存的数据重新赋值给当前的自定义View
+    }
+
     /**
      * Set the custom {@link TabColorizer} to be used.
      *
@@ -136,7 +154,7 @@ public class CompassTabView extends HorizontalScrollView {
     }
 
     /**
-     * Set the {@link ViewPager.OnPageChangeListener}. When using {@link CompassTabView} you are
+     * Set the {@link ViewPager.OnPageChangeListener}. When using {@link SlidingTabLayout} you are
      * required to set any {@link ViewPager.OnPageChangeListener} through this method. This is so
      * that the layout can update it's scroll position correctly.
      *
@@ -204,7 +222,7 @@ public class CompassTabView extends HorizontalScrollView {
         paint.setTextSize(ScreenUtil.spToPx(context,TAB_VIEW_TEXT_SIZE_SP));
         int text_width = (int) paint.measureText(text);// 得到总体长度
 
-        int padding = (tablayoutW - 11 * text_width)/8;
+        int padding = (tablayoutW - 12 * text_width)/8;
 
 //        int padding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
         textView.setPadding(padding , 0, padding , 0);
@@ -249,9 +267,8 @@ public class CompassTabView extends HorizontalScrollView {
         super.onAttachedToWindow();
 
         if (mViewPager != null) {
-            scrollToTab(mViewPager.getCurrentItem(), 0);
-            setTextChange(mViewPager.getCurrentItem());
-
+            scrollToTab(mViewPager.getCurrentItem(), currentPosition);
+            setTextChange(currentPosition);
         }
     }
 
@@ -309,6 +326,7 @@ public class CompassTabView extends HorizontalScrollView {
 
         @Override
         public void onPageSelected(int position) {
+            currentPosition = position;
             if (mScrollState == ViewPager.SCROLL_STATE_IDLE) {
                 mTabStrip.onViewPagerPageChanged(position, 0f);
                 scrollToTab(position, 0);
@@ -324,9 +342,11 @@ public class CompassTabView extends HorizontalScrollView {
 
     }
 
-    int initPos = 0;
-    public void setInitPosition(int pos){
-        initPos = pos;
+    public void onViewCreate(){
+        if (mViewPager != null) {
+            scrollToTab(mViewPager.getCurrentItem(), currentPosition);
+            setTextChange(currentPosition);
+        }
     }
 
     private void setTextChange(int position){
@@ -334,10 +354,8 @@ public class CompassTabView extends HorizontalScrollView {
             TextView textView = (TextView) mTabStrip.getChildAt(i);
             if(i == position) {
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP + 5);
-                System.out.println(20);
             }else{
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
-                System.out.println(0);
             }
 
         }
@@ -355,12 +373,37 @@ public class CompassTabView extends HorizontalScrollView {
         }
     }
 
-//    public View getAnchor(){
-//        if(mTabStrip.getChildCount() > 3){
-//            return mTabStrip.getChildAt(3);
-//        }
-//        return null;
-//    }
+    static class MySavedState extends BaseSavedState{
 
+        //当前的ViewPager的位置
+        int currentPosition;
 
+        public MySavedState(Parcel source) {
+            super(source);
+            currentPosition = source.readInt();
+        }
+
+        public MySavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(currentPosition);
+        }
+
+        public static final Parcelable.Creator<MySavedState> CREATOR = new Parcelable.Creator<MySavedState>(){
+
+            @Override
+            public MySavedState createFromParcel(Parcel source) {
+                return new MySavedState(source);
+            }
+
+            @Override
+            public MySavedState[] newArray(int size) {
+                return new MySavedState[size];
+            }
+        };
+    }
 }

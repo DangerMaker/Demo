@@ -11,11 +11,6 @@ public class LoginContract {
     }
 
     interface Presenter extends BasePresenter {
-
-        void subscribe();
-
-        void unsubscribe();
-
         void login(String name,String pwd);
     }
 }

@@ -16,6 +16,7 @@
             android:layout_height="25dip"
             android:padding="5dp"
             android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dp"
             android:background="@drawable/market_daynight" />
 
         <com.compass.market.view.CompassTabView
@@ -29,15 +30,15 @@
             android:layout_width="25dip"
             android:layout_height="25dip"
             android:padding="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dip"
             android:background="@drawable/market_search" />
 
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="行情首页" />
+   <androidx.viewpager.widget.ViewPager
+       android:id="@+id/view_pager"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
 </LinearLayout>

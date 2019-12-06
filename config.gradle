@@ -37,27 +37,29 @@ ext {
             arouterAnnotationVersion: "1.5.0",
             rxJavaVersion           : "2.2.0",
             rxAndroidVersion        : "2.0.2",
-            roomVersion             : "1.1.1"
+            roomVersion             : "1.1.1",
+            recyclerviewVersion     : "1.0.0"
     ]
 
     dependencies = [
-            "appcompat"           : "androidx.appcompat:appcompat:${versions["appcompatVersion"]}",
-            "constraintlayout"    : "androidx.constraintlayout:constraintlayout:${versions["constraintlayoutVersion"]}",
-            "runner"              : "androidx.test:runner:${versions["runnerVersion"]}",
-            "espresso_core"       : "androidx.test.espresso:espresso-core:${versions["espressoVersion"]}",
-            "junit"               : "junit:junit:${versions["junitVersion"]}",
+            "appcompat"          : "androidx.appcompat:appcompat:${versions["appcompatVersion"]}",
+            "constraintlayout"   : "androidx.constraintlayout:constraintlayout:${versions["constraintlayoutVersion"]}",
+            "runner"             : "androidx.test:runner:${versions["runnerVersion"]}",
+            "espresso_core"      : "androidx.test.espresso:espresso-core:${versions["espressoVersion"]}",
+            "junit"              : "junit:junit:${versions["junitVersion"]}",
 
-            "design"              : "com.google.android.material:material:${versions["designVersion"]}",
+            "design"             : "com.google.android.material:material:${versions["designVersion"]}",
             //方法数超过65535解决方法64K MultiDex分包方法
-            "multidex"            : "androidx.multidex:multidex:${versions["multidexVersion"]}",
+            "multidex"           : "androidx.multidex:multidex:${versions["multidexVersion"]}",
 
             //阿里路由
-            "arouter_api"         : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
-            "arouter_compiler"    : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
-            "arouter_annotation"  : "com.alibaba:arouter-annotation:${versions["arouterAnnotationVersion"]}",
-            "rxJava"              : "io.reactivex.rxjava2:rxjava:${versions["rxJavaVersion"]}",
-            "rxAndroid"           : "io.reactivex.rxjava2:rxandroid:${versions["rxAndroidVersion"]}",
-            "room"                : "android.arch.persistence.room:runtime:${versions["roomVersion"]}",
-            "room_compiler"       :"android.arch.persistence.room:compiler:${versions["roomVersion"]}"
+            "arouter_api"        : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
+            "arouter_compiler"   : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
+            "arouter_annotation" : "com.alibaba:arouter-annotation:${versions["arouterAnnotationVersion"]}",
+            "rxJava"             : "io.reactivex.rxjava2:rxjava:${versions["rxJavaVersion"]}",
+            "rxAndroid"          : "io.reactivex.rxjava2:rxandroid:${versions["rxAndroidVersion"]}",
+            "room"               : "android.arch.persistence.room:runtime:${versions["roomVersion"]}",
+            "room_compiler"      : "android.arch.persistence.room:compiler:${versions["roomVersion"]}",
+            "recyclerview"       : "androidx.recyclerview:recyclerview:${versions["recyclerviewVersion"]}"
     ]
 }
