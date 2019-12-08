@@ -20,20 +20,20 @@ public class BaseApplication extends Application {
         //net init
         Client.getInstance().init(BaseApplication.this);
 
-        UserHelper.getCurrent(getApplicationContext())
-                .subscribeOn(SchedulerProvider.getInstance().io())
-                .observeOn(SchedulerProvider.getInstance().ui())
-                .subscribe(new Consumer<User>() {
-                    @Override
-                    public void accept(User user) {
-                        Client.getInstance().connect(user);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) {
-                        Client.getInstance().connect(null);
-                    }
-                });
+//        UserHelper.getCurrent(getApplicationContext())
+//                .subscribeOn(SchedulerProvider.getInstance().io())
+//                .observeOn(SchedulerProvider.getInstance().ui())
+//                .subscribe(new Consumer<User>() {
+//                    @Override
+//                    public void accept(User user) {
+//                        Client.getInstance().connect(user);
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) {
+//                        Client.getInstance().connect(null);
+//                    }
+//                });
 
     }
 }

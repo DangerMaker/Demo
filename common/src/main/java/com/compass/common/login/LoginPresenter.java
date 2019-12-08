@@ -15,11 +15,13 @@ import io.reactivex.functions.Consumer;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
+    LoginContract.View view;
     private CompositeDisposable mCompositeDisposable;
     private UserDatabase database;
     private SchedulerProvider scheduler;
 
-    public LoginPresenter(UserDatabase database) {
+    public LoginPresenter(LoginContract.View view,UserDatabase database) {
+        this.view = view;
         this.mCompositeDisposable = new CompositeDisposable();
         this.database = database;
         this.scheduler = SchedulerProvider.getInstance();

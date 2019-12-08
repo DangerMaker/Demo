@@ -4,9 +4,20 @@ package com.ez08.support.net;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 
+import androidx.annotation.NonNull;
+
 public abstract class NetResponseHandler2 extends Handler {
+
+	public NetResponseHandler2() {
+	}
+
+	public NetResponseHandler2(@NonNull Looper looper) {
+		super(looper);
+	}
+
 	@Override
 	public void handleMessage(Message msg) {
 		if (msg == null){

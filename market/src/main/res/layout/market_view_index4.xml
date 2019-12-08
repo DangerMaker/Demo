@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/sh_layout"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+        <TextView
+            android:id="@+id/sh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="上证指数"
+            android:textColor="@color/common_stock_close"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/sh_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:text="- -"
+            android:gravity="center_horizontal"
+            android:textColor="@color/common_stock_close"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/sh_increase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:textColor="@color/common_stock_close"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:background="@color/common_divide_line" />
+
+    <LinearLayout
+        android:id="@+id/sz_layout"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+
+        <TextView
+            android:id="@+id/se"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="深证成指"
+            android:textColor="@color/common_stock_close"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/sz_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:text="- -"
+            android:gravity="center_horizontal"
+            android:textColor="@color/common_stock_close"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/sz_increase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:textColor="@color/common_stock_close"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:background="@color/common_divide_line" />
+
+    <LinearLayout
+        android:id="@+id/cy_layout"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+        <TextView
+            android:id="@+id/cy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="创业板指"
+            android:textColor="@color/common_stock_close"
+            android:textSize="13dp" />
+
+
+        <TextView
+            android:id="@+id/cy_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:text="- -"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textColor="@color/common_stock_close"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/cy_increase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:textColor="@color/common_stock_close"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:background="@color/common_divide_line" />
+
+    <LinearLayout
+        android:id="@+id/zxbz_layout"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+
+        <TextView
+            android:id="@+id/zxbz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="中小板指"
+            android:textColor="@color/common_stock_close"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/zxbz_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:text="- -"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textColor="@color/common_stock_close"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/zxbz_increase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:textColor="@color/common_stock_close"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</LinearLayout>

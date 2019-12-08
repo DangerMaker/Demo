@@ -1,59 +1,73 @@
 package com.compass.market.hangqing;
 
-import android.content.Intent;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.compass.common.local.UserDao;
-import com.compass.common.net.NetInterface;
-import com.compass.common.net.RemoteRepository;
 import com.compass.common.net.Response;
 import com.compass.common.rx.SchedulerProvider;
-import com.compass.common.user.User;
 import com.compass.market.MarketRemoteRepository;
 import com.compass.market.model.HangQingResp;
-import com.ez08.support.net.NetResponseHandler2;
+import com.compass.market.model.ItemStock;
+import com.compass.market.model.StockMarketEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-public class HangQingPresenter implements HangContract.Presenter {
+public class HangQingPresenter implements HangQingContract.Presenter {
     private CompositeDisposable mCompositeDisposable;
     private SchedulerProvider scheduler;
+    List<ItemStock> indexs = new ArrayList<>();
 
     @Nullable
-    private final HangContract.View mHangQingView;
+    private final HangQingContract.View mHangQingView;
 
-    public HangQingPresenter(@Nullable HangContract.View view) {
+    public HangQingPresenter(@Nullable HangQingContract.View view) {
         this.mCompositeDisposable = new CompositeDisposable();
         this.scheduler = SchedulerProvider.getInstance();
         this.mHangQingView = view;
     }
 
     @Override
-    public void getList() {
+    public void subscribe() {
+        loadIndexs();
+//        loadMarkets();
+    }
+
+    @Override
+    public void unsubscribe() {
+        mCompositeDisposable.dispose();
+    }
+
+    @Override
+    public void loadMarkets() {
         Disposable disposable = MarketRemoteRepository.getHangqing()
                 .subscribeOn(scheduler.ui())
                 .observeOn(scheduler.ui())
                 .subscribe(new Consumer<Response<HangQingResp>>() {
                     @Override
                     public void accept(Response<HangQingResp> userResponse) {
-                        mHangQingView.setList(userResponse.getData());
+//                        mHangQingView.showMarkets(userResponse.getData());
+//                        mHangQingView.showMarketsEmpty();
                     }
                 });
         mCompositeDisposable.add(disposable);
     }
 
     @Override
-    public void subscribe() {
-
-    }
-
-    @Override
-    public void unsubscribe() {
-        mCompositeDisposable.dispose();
+    public void loadIndexs() {
+        Disposable disposable = MarketRemoteRepository.getStockQuery()
+                .subscribeOn(scheduler.io())
+                .observeOn(scheduler.ui())
+                .subscribe(new Consumer<Response<List<StockMarketEntity>>>() {
+                    @Override
+                    public void accept(Response<List<StockMarketEntity>> listResponse) {
+                        List<StockMarketEntity> stocks = listResponse.getData();
+                        mHangQingView.showIndexs(stocks);
+                    }
+                });
+        mCompositeDisposable.add(disposable);
     }
 }

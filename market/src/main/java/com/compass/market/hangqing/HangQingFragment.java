@@ -1,25 +1,36 @@
 package com.compass.market.hangqing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.compass.common.base.BaseFragment;
+import com.compass.common.net.NetInterface;
 import com.compass.market.R;
 import com.compass.market.model.HangQingResp;
 import com.compass.market.model.IndexModel;
+import com.compass.market.model.ItemStock;
+import com.compass.market.model.StockMarketEntity;
+import com.compass.market.view.Index3GridView;
+import com.compass.market.view.Index4GridView;
+import com.ez08.support.net.NetResponseHandler2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HangQingFragment extends BaseFragment implements HangContract.View {
+public class HangQingFragment extends BaseFragment implements HangQingContract.View {
 
-    RecyclerView recyclerView;
     HangQingPresenter presenter;
-    HangQingAdapter adapter;
+    LinearLayout marketRootView;
+    Index4GridView index4GridView;
+    Index3GridView index3GridView;
 
     @Override
     protected int getLayoutId() {
@@ -29,11 +40,10 @@ public class HangQingFragment extends BaseFragment implements HangContract.View 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.recycler_view);
-        adapter = new HangQingAdapter(mContext);
-        recyclerView.setAdapter(adapter);
+        marketRootView = view.findViewById(R.id.market_root_view);
+        index4GridView = view.findViewById(R.id.index4);
+        index3GridView = view.findViewById(R.id.index3);
         presenter = new HangQingPresenter(this);
-        presenter.getList();
     }
 
     @Override
@@ -42,18 +52,22 @@ public class HangQingFragment extends BaseFragment implements HangContract.View 
     }
 
     @Override
-    public void setList(HangQingResp resp) {
-        List<Object> data = new ArrayList<>();
-        for (int i = 0; i < resp.boardlist0.size(); i++) {
-            data.add(IndexModel.parser(resp.boardlist0.get(i)));
-        }
-
+    public void showMarkets(HangQingResp resp) {
+//        data.add(resp.boardlist0);
+//        adapter.update(data);
     }
 
     @Override
-    public void setPresenter(HangContract.Presenter presenter) {
-
+    public void showMarketsEmpty() {
+        index4GridView.setData(null);
+        index3GridView.setData(null);
     }
+
+    @Override
+    public void showIndexs(List<StockMarketEntity> stocks) {
+        index4GridView.setData(stocks);
+    }
+
 
     @Override
     public void onResume() {

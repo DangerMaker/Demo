@@ -35,4 +35,5 @@ public class ScreenUtil {
         }
         return dp * context.getResources().getDisplayMetrics().density;
     }
+
 }

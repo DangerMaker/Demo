@@ -44,7 +44,6 @@ public class Client {
         filter.addAction(NetManager.ACTION_AUTH_LOGIN);
         filter.addAction(NetManager.ACTION_AUTH_LOGOUT_RESPONSE);
         EzNet.regMessageHandler(receiver, filter);
-
         UserHelper.init(application);
     }
 

@@ -2,4 +2,13 @@
 <resources>
     <color name="common_line">#BFBFBF</color>
     <color name="common_red">#FF3030</color>
+
+
+    <color name="common_stock_name">#000000</color>
+    <color name="common_stock_code">#808080</color>
+    <color name="common_stock_red">#ff0000</color>
+    <color name="common_stock_green">#38a008</color>
+    <color name="common_stock_close">#6E6E6E</color>
+    <color name="common_divide_line">#BFBFBF</color>
+
 </resources>

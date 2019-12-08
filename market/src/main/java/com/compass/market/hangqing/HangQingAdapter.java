@@ -15,6 +15,10 @@ import com.compass.market.model.IndexModel;
 import com.compass.market.model.StockModel;
 import com.compass.market.model.TitleModel;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class HangQingAdapter extends BaseAdapter {
 
@@ -27,19 +31,22 @@ public class HangQingAdapter extends BaseAdapter {
     @Override
     public int getItemViewType(int position) {
         Object object = getItem(position);
-        if(object instanceof IndexModel){
+        if(object instanceof List ){
             return INDEX;
-        }else if(object instanceof Cp2Model){
-            return CP2;
-        }else if(object instanceof Cp3Model){
-            return CP3;
-        }else if(object instanceof TitleModel){
-            return TITLE;
-        }else if(object instanceof StockModel){
-            return STOCK;
         }
+//        else if(object instanceof Cp2Model){
+//            return CP2;
+//        }else if(object instanceof Cp3Model){
+//            return CP3;
+//        }else if(object instanceof TitleModel){
+//            return TITLE;
+//        }else if(object instanceof StockModel){
+//            return STOCK;
+//        }
         return 0;
     }
+
+
 
     public HangQingAdapter(Context context) {
         super(context);
@@ -50,14 +57,14 @@ public class HangQingAdapter extends BaseAdapter {
         switch (viewType) {
             case INDEX:
                 return new CustomIndexHolder(parent);
-            case CP2:
-                return new Cp2BoradHolder(parent);
-            case CP3:
-                return new Cp3BoradHolder(parent);
-            case TITLE:
-                return new TitleHolder(parent);
-            case STOCK:
-                return new StockHolder(parent);
+//            case CP2:
+//                return new Cp2BoradHolder(parent);
+//            case CP3:
+//                return new Cp3BoradHolder(parent);
+//            case TITLE:
+//                return new TitleHolder(parent);
+//            case STOCK:
+//                return new StockHolder(parent);
             default:
                 return null;
         }

@@ -29,8 +29,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
         loginButton = findViewById(R.id.load_btn);
         loginButton.setOnClickListener(this);
 
-        presenter = new LoginPresenter(UserDatabase.getInstance(context));
-        setPresenter(presenter);
+        presenter = new LoginPresenter(this, UserDatabase.getInstance(context));
     }
 
     @Override
@@ -38,18 +37,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
 
     }
 
-
-    @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
-
-    }
-
     @Override
     public void onClick(View view) {
-        if(view == loginButton){
+        if (view == loginButton) {
             String name = username.getText().toString();
             String pass = password.getText().toString();
-            presenter.login(name,pass);
+            presenter.login(name, pass);
         }
     }
 }

@@ -6,6 +6,13 @@ public class IndexModel {
     public String updianshu;
     public String upPercent;
 
+    public IndexModel(String title) {
+        this.title = title;
+    }
+
+    public IndexModel() {
+    }
+
     public static IndexModel parser(PlateMarketEntity entity){
         IndexModel model = new IndexModel();
         model.title = entity.getBoardname();
