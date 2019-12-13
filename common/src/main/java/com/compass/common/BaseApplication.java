@@ -2,38 +2,32 @@ package com.compass.common;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 
 import com.compass.common.net.Client;
-import com.compass.common.rx.SchedulerProvider;
-import com.compass.common.user.User;
-import com.compass.common.user.UserHelper;
+import com.compass.common.net.LocalInfo;
+import com.compass.common.net.extproto.Protocol_ZhiNanTong;
+import com.compass.common.utils.AppExecutors;
 
-import io.reactivex.functions.Consumer;
 
 public class BaseApplication extends Application {
 
+    Context mContext;
 
     @SuppressLint("CheckResult")
     @Override
     public void onCreate() {
         super.onCreate();
-        //net init
-        Client.getInstance().init(BaseApplication.this);
+        mContext = this;
 
-//        UserHelper.getCurrent(getApplicationContext())
-//                .subscribeOn(SchedulerProvider.getInstance().io())
-//                .observeOn(SchedulerProvider.getInstance().ui())
-//                .subscribe(new Consumer<User>() {
-//                    @Override
-//                    public void accept(User user) {
-//                        Client.getInstance().connect(user);
-//                    }
-//                }, new Consumer<Throwable>() {
-//                    @Override
-//                    public void accept(Throwable throwable) {
-//                        Client.getInstance().connect(null);
-//                    }
-//                });
+        new AppExecutors().networkIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                Client.getInstance().setLocal(new LocalInfo(mContext
+                        , Protocol_ZhiNanTong.proto_zhinantong));
+                Client.getInstance().connect();
 
+            }
+        });
     }
 }

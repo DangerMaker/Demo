@@ -1,38 +1,27 @@
 package com.compass.market;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Looper;
+import android.util.Log;
 
-import com.compass.common.net.NetInterface;
+import com.compass.common.net.Client;
 import com.compass.common.net.Response;
 import com.compass.common.net.exception.CustomException;
-import com.compass.common.user.User;
-import com.compass.common.utils.MD5;
+import com.compass.common.net.userauth.Callback;
+import com.compass.common.net.userauth.EzPackage;
+import com.compass.market.hangqing.HangQingParser;
 import com.compass.market.model.HangQingResp;
-import com.compass.market.model.PlateMarketEntity;
 import com.compass.market.model.StockMarketEntity;
-import com.ez08.support.net.EzMessage;
-import com.ez08.support.net.EzNet;
-import com.ez08.support.net.NetManager;
-import com.ez08.support.net.NetResponseHandler2;
-import com.ez08.support.util.EzValue;
-import com.ez08.tools.IntentTools;
+import com.ez08.eznet.custom.support.EzIntent;
+import com.ez08.eznet.custom.support.EzKeyValue;
+import com.ez08.eznet.custom.support.EzMessage;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 
-import static com.compass.common.net.RemoteRepository.RESPONSE;
-
 public class MarketRemoteRepository {
-
-    public static int RESPONSE = 1001;
-    public static int GET_STOCK_RESPONSE = 1002;
 
     @SuppressLint("HandlerLeak")
     public static Observable<Response<HangQingResp>> getHangqing() {
@@ -40,36 +29,33 @@ public class MarketRemoteRepository {
         return Observable.create(new ObservableOnSubscribe<Response<HangQingResp>>() {
             @Override
             public void subscribe(final ObservableEmitter<Response<HangQingResp>> emitter) throws Exception {
-//                NetInterface.getMarketData(new NetResponseHandler2() {
-//                    @Override
-//                    public void receive(int what, boolean result, Intent intent) {
-//
-//                    }
-//                },RESPONSE);
-                HangQingResp resp = new HangQingResp();
-                StockMarketEntity stock = new StockMarketEntity();
-                List<StockMarketEntity> list1 = new ArrayList<>();
-                list1.add(stock.getTest());
-                list1.add(stock.getTest());
-                list1.add(stock.getTest());
-                list1.add(stock.getTest());
-                list1.add(stock.getTest());
-                resp.stocklist1 = list1;
-                resp.stocklist2 = list1;
-                resp.kclist = list1;
+                EzIntent intent = new EzIntent("ez08.zntr.marketpreview.q");
+                Client.getInstance().send(new EzPackage(intent), new Callback() {
+                    @Override
+                    public void onResult(boolean success, EzIntent intent) {
+                        if (success) {
+                            Log.e("marketpreview",intent.toEzMessage().description());
+                            HangQingResp resp = new HangQingResp();
+                            EzMessage[] boardlist0 = intent.getExtraDataEzMessages("boardlist0");
+                            resp.boardlist0 = HangQingParser.parsePlateList(boardlist0);
+                            EzMessage[] boardlist1 = intent.getExtraDataEzMessages("boardlist1");
+                            resp.boardlist1 = HangQingParser.parsePlateList(boardlist1);
+                            EzMessage[] boardlist2 = intent.getExtraDataEzMessages("boardlist2");
+                            resp.boardlist2 = HangQingParser.parsePlateList(boardlist2);
+                            EzMessage[] kclist = intent.getExtraDataEzMessages("kclist");
+                            resp.kclist = HangQingParser.parseStockList(kclist);
+                            EzMessage[] stocklist1 = intent.getExtraDataEzMessages("stocklist1");
+                            resp.stocklist1 = HangQingParser.parseStockList(stocklist1);
+                            EzMessage[] stocklist2 = intent.getExtraDataEzMessages("stocklist2");
+                            resp.stocklist2 = HangQingParser.parseStockList(stocklist2);
 
-                PlateMarketEntity plate = new PlateMarketEntity();
-                List<PlateMarketEntity> list2 = new ArrayList<>();
-                list2.add(plate.getTest());
-                list2.add(plate.getTest());
-                list2.add(plate.getTest());
-                list2.add(plate.getTest());
-                resp.boardlist0 = list2;
-                resp.boardlist1 = list2;
-                resp.boardlist2 = list2;
-                Response<HangQingResp> respResponse = new Response<>();
-                respResponse.setData(resp);
-                emitter.onNext(respResponse);
+                            Response<HangQingResp> respResponse = new Response<>();
+                            respResponse.setData(resp);
+                            emitter.onNext(respResponse);
+                        }
+
+                    }
+                });
             }
         });
     }
@@ -78,29 +64,24 @@ public class MarketRemoteRepository {
     public static Observable<Response<List<StockMarketEntity>>> getStockQuery() {
         return Observable.create(new ObservableOnSubscribe<Response<List<StockMarketEntity>>>() {
             @Override
-            public void subscribe(final ObservableEmitter<Response<List<StockMarketEntity>>> emitter) throws Exception {
-                NetInterface.getStockBrief(new NetResponseHandler2(Looper.getMainLooper()) {
+            public void subscribe(final ObservableEmitter<Response<List<StockMarketEntity>>> emitter) {
+                EzIntent intent = new EzIntent("ez08.zntr.stockbrief.q");
+                intent.putExtraData(new EzKeyValue("secucodes", "SHHQ000001,SZHQ399001,SZHQ399006,SZHQ399005"));
+                Client.getInstance().send(new EzPackage(intent), new Callback() {
                     @Override
-                    public void receive(int what, boolean result, Intent intent) {
-                        List<StockMarketEntity> list = new ArrayList<>();
-                        EzValue ezValue = IntentTools.safeGetEzValueFromIntent(
-                                intent, "list");
-                        EzMessage[] msges = ezValue.getMessages();
-                        StockMarketParser parser = new StockMarketParser();
-                        for (int i = 0; i < msges.length; i++) {
-                            StockMarketEntity entity = parser.parse(msges[i]);
-                            if (entity != null) {
-                                list.add(entity);
-                            }
+                    public void onResult(boolean success, EzIntent intent) {
+                        if (success) {
+                            EzMessage[] list = intent.getExtraDataEzMessages("list");
+                            List<StockMarketEntity> data  = HangQingParser.parseStockList(list);
+                            Response<List<StockMarketEntity>> response = new Response<>();
+                            response.setData(data);
+                            emitter.onNext(response);
+                        } else {
+                            emitter.onError(CustomException.throwCommonException(intent));
                         }
-
-                        Response<List<StockMarketEntity>> response = new Response<>();
-                        response.setData(list);
-                        emitter.onNext(response);
                     }
-                }, GET_STOCK_RESPONSE, "SHHQ000001,SZHQ399001,SZHQ399006,SZHQ399005");
+                });
             }
         });
     }
-
 }

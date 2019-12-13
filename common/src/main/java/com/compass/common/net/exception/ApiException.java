@@ -4,9 +4,9 @@ public class ApiException extends Exception {
     private int code;
     private String displayMessage;
 
-    public ApiException(int code, String displayMessage) {
+    public ApiException(int code, String message) {
+        super(message);
         this.code = code;
-        this.displayMessage = displayMessage;
     }
 
     public ApiException(int code, String message, String displayMessage) {

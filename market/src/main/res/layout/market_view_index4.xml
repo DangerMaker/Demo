@@ -48,7 +48,7 @@
     </LinearLayout>
 
     <View
-        android:layout_width="1dp"
+        android:layout_width="1px"
         android:layout_height="20dp"
         android:background="@color/common_divide_line" />
 
@@ -96,7 +96,7 @@
     </LinearLayout>
 
     <View
-        android:layout_width="1dp"
+        android:layout_width="1px"
         android:layout_height="20dp"
         android:background="@color/common_divide_line" />
 
@@ -144,7 +144,7 @@
     </LinearLayout>
 
     <View
-        android:layout_width="1dp"
+        android:layout_width="1px"
         android:layout_height="20dp"
         android:background="@color/common_divide_line" />
 

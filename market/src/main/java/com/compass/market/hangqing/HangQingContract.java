@@ -3,7 +3,6 @@ package com.compass.market.hangqing;
 import com.compass.common.base.BasePresenter;
 import com.compass.common.base.BaseView;
 import com.compass.market.model.HangQingResp;
-import com.compass.market.model.ItemStock;
 import com.compass.market.model.StockMarketEntity;
 
 import java.util.List;

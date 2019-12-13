@@ -1,5 +1,9 @@
 package com.compass.common.net.exception;
 
+import android.app.Application;
+
+import com.ez08.eznet.custom.support.EzIntent;
+
 public class CustomException {
 
     /**
@@ -24,12 +28,20 @@ public class CustomException {
 
     public static final int USER_ERROR = 1005;
 
-    public static ApiException throwNetworkException(){
+    public static ApiException throwNetworkException() {
         return new ApiException(NETWORK_ERROR, "我是网络异常");
     }
 
-    public static ApiException throwNoUserExcption(){
+    public static ApiException throwNoUserExcption() {
         return new ApiException(USER_ERROR, "我什么也不是");
+    }
+
+    public static ApiException throwCommonException(EzIntent intent) {
+        String reqaction = intent.getExtraDataString("reqaction", "");
+        boolean result = intent.getExtraDataBoolean("result", false);
+        int errcode = intent.getExtraDataInt32("errcode", 0);
+        String msg = intent.getExtraDataString("msg", "");
+        return new ApiException(errcode, msg);
     }
 
     public static ApiException handleException(Throwable e) {
@@ -46,12 +58,12 @@ public class CustomException {
 //            return ex;
 //        } else if (e instanceof UnknownHostException || e instanceof SocketTimeoutException) {
 //            //连接错误
-            ex = new ApiException(NETWORK_ERROR, e.getMessage());
+        ex = new ApiException(NETWORK_ERROR, e.getMessage());
 //            return ex;
 //        } else {
 //            //未知错误
 //            ex = new ApiException(UNKNOWN, e.getMessage());
-            return ex;
+        return ex;
 //        }
     }
 }

@@ -1,11 +1,10 @@
 package com.compass.common.user;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.ez08.eznet.custom.support.EzIntent;
 
 @Entity(tableName = "user")
 public class User {
@@ -29,28 +28,16 @@ public class User {
 
     public boolean current = false;
 
-    public static User parser(Intent intent){
+    public static User parser(EzIntent intent){
         User user = new User();
-        user.level = intent.getIntExtra("level", -1);
-        user.auths = intent.getStringExtra("auths");
-        user.cid = intent.getStringExtra("cid");
-        user.tid = intent.getStringExtra("tid");
-        user.token = intent.getStringExtra("token");
-        user.mobile = intent.getStringExtra("mobile");
-        user.realname = intent.getStringExtra("realname");
+        user.level = intent.getExtraDataInt32("level", -1);
+        user.auths = intent.getExtraDataString("auths","");
+        user.cid = intent.getExtraDataString("cid","");
+        user.tid = intent.getTID();
+        user.token = intent.getExtraDataString("token","");
+        user.mobile = intent.getExtraDataString("mobile","");
+        user.realname = intent.getExtraDataString("realname","");
         user.current = true;
-
-        Bundle bundle = intent.getBundleExtra("config");
-        if(bundle != null){
-            user.province = bundle.getString("province");
-            user.sex = bundle.getInt("sex");
-            user.city = bundle.getString("city");
-            user.iscs = bundle.getString("iscs");
-            user.name = bundle.getString("name");
-            user.state = bundle.getString("state");
-            user.country = bundle.getString("country");
-            user.imageid = bundle.getString("imageid");
-        }
         return user;
     }
 

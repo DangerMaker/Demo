@@ -11,7 +11,7 @@ public class MainAdapter extends FragmentPagerAdapter {
 
     List<Fragment> list;
     public MainAdapter(@NonNull FragmentManager fm, List<Fragment> list) {
-        super(fm);
+        super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.list = list;
     }
 

@@ -38,7 +38,8 @@ ext {
             rxJavaVersion           : "2.2.0",
             rxAndroidVersion        : "2.0.2",
             roomVersion             : "1.1.1",
-            recyclerviewVersion     : "1.0.0"
+            recyclerviewVersion     : "1.0.0",
+            refreshLayoutVersion    : "1.1.0"
     ]
 
     dependencies = [
@@ -60,6 +61,7 @@ ext {
             "rxAndroid"          : "io.reactivex.rxjava2:rxandroid:${versions["rxAndroidVersion"]}",
             "room"               : "android.arch.persistence.room:runtime:${versions["roomVersion"]}",
             "room_compiler"      : "android.arch.persistence.room:compiler:${versions["roomVersion"]}",
-            "recyclerview"       : "androidx.recyclerview:recyclerview:${versions["recyclerviewVersion"]}"
+            "recyclerview"       : "androidx.recyclerview:recyclerview:${versions["recyclerviewVersion"]}",
+            "refreshLayout"      : "com.scwang.smartrefresh:SmartRefreshLayout:${versions["refreshLayoutVersion"]}"
     ]
 }

@@ -1,36 +1,34 @@
 package com.compass.market.hangqing;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.compass.common.base.BaseFragment;
-import com.compass.common.net.NetInterface;
 import com.compass.market.R;
 import com.compass.market.model.HangQingResp;
-import com.compass.market.model.IndexModel;
-import com.compass.market.model.ItemStock;
 import com.compass.market.model.StockMarketEntity;
+import com.compass.market.view.Broad3GridView;
 import com.compass.market.view.Index3GridView;
 import com.compass.market.view.Index4GridView;
-import com.ez08.support.net.NetResponseHandler2;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HangQingFragment extends BaseFragment implements HangQingContract.View {
 
-    HangQingPresenter presenter;
-    LinearLayout marketRootView;
-    Index4GridView index4GridView;
-    Index3GridView index3GridView;
+    private HangQingPresenter presenter;
+    private LinearLayout marketRootView;
+    private Index4GridView index4GridView;
+    private Index3GridView index3GridView;
+    private Broad3GridView broad3UpView;
+    private Broad3GridView broad3DownView;
+    RefreshLayout refreshLayout;
 
     @Override
     protected int getLayoutId() {
@@ -40,10 +38,20 @@ public class HangQingFragment extends BaseFragment implements HangQingContract.V
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        refreshLayout = view.findViewById(R.id.refresh_layout);
         marketRootView = view.findViewById(R.id.market_root_view);
         index4GridView = view.findViewById(R.id.index4);
         index3GridView = view.findViewById(R.id.index3);
+        broad3DownView = view.findViewById(R.id.broad3_down);
+        broad3UpView = view.findViewById(R.id.broad3_up);
         presenter = new HangQingPresenter(this);
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refreshLayout.finishRefresh(2000);
+            }
+        });
     }
 
     @Override
@@ -53,8 +61,9 @@ public class HangQingFragment extends BaseFragment implements HangQingContract.V
 
     @Override
     public void showMarkets(HangQingResp resp) {
-//        data.add(resp.boardlist0);
-//        adapter.update(data);
+        index3GridView.setData(resp.boardlist0);
+        broad3UpView.setData(resp.boardlist1,"领涨板块");
+        broad3DownView.setData(resp.boardlist2,"领跌板块");
     }
 
     @Override

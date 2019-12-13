@@ -10,7 +10,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.compass.common.EmptyFragment;
 import com.compass.common.base.BaseActivity;
+import com.compass.common.kefu.KefuFragment;
+import com.compass.common.selfcode.SelfCodeFragment;
 import com.compass.market.MarketHostFragment;
+import com.compass.market.hangqing.HangQingFragment;
 import com.compass.trade.TradeHostFragment;
 
 import java.util.ArrayList;
@@ -46,10 +49,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         layout5.setOnClickListener(this);
 
         Fragment fragment1 = new MarketHostFragment();
-        Fragment fragment2 = new EmptyFragment();
+        Fragment fragment2 = new SelfCodeFragment();
         Fragment fragment3 = new EmptyFragment();
-        Fragment fragment4 = new TradeHostFragment();
-        Fragment fragment5 = new MarketHostFragment();
+        Fragment fragment4 = new EmptyFragment();
+        Fragment fragment5 = new KefuFragment();
         List<Fragment> list = new ArrayList<>();
         list.add(fragment1);
         list.add(fragment2);

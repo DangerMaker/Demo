@@ -56,9 +56,9 @@ public class EzKeyValue extends EzValue{
 				return false;
 			ByteArrayOutputStream rawOutput = new ByteArrayOutputStream();
 		    CodedOutputStream cop = CodedOutputStream.newInstance(rawOutput);
-			//§Õkey
+			//??key
 		    cop.writeStringNoTag(name);
-			//§Õvalue(??valueType)
+			//??value(??valueType)
 			writeValueTo(cop);
 		    cop.flush();
 		    byte[] bytearray = rawOutput.toByteArray();

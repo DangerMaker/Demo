@@ -30,8 +30,6 @@ public class CalculateUtil {
     public static String prefix(float current,float lastclose){
         if(current > lastclose){
             return "+";
-        }else if(current < lastclose){
-            return "-";
         }else {
             return "";
         }

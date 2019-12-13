@@ -6,10 +6,8 @@ import com.compass.common.net.Response;
 import com.compass.common.rx.SchedulerProvider;
 import com.compass.market.MarketRemoteRepository;
 import com.compass.market.model.HangQingResp;
-import com.compass.market.model.ItemStock;
 import com.compass.market.model.StockMarketEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -19,7 +17,6 @@ import io.reactivex.functions.Consumer;
 public class HangQingPresenter implements HangQingContract.Presenter {
     private CompositeDisposable mCompositeDisposable;
     private SchedulerProvider scheduler;
-    List<ItemStock> indexs = new ArrayList<>();
 
     @Nullable
     private final HangQingContract.View mHangQingView;
@@ -33,7 +30,7 @@ public class HangQingPresenter implements HangQingContract.Presenter {
     @Override
     public void subscribe() {
         loadIndexs();
-//        loadMarkets();
+        loadMarkets();
     }
 
     @Override
@@ -49,7 +46,7 @@ public class HangQingPresenter implements HangQingContract.Presenter {
                 .subscribe(new Consumer<Response<HangQingResp>>() {
                     @Override
                     public void accept(Response<HangQingResp> userResponse) {
-//                        mHangQingView.showMarkets(userResponse.getData());
+                        mHangQingView.showMarkets(userResponse.getData());
 //                        mHangQingView.showMarketsEmpty();
                     }
                 });
